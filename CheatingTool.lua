@@ -53,11 +53,19 @@ end
 if game:GetService("Workspace").MiniGameObjects:FindFirstChild("Head"):FindFirstChild("Head") then
 tp_client(game:GetService("Workspace").MiniGameObjects.Head.Head)
 end--]]
-if game.Workspace.MiniGameObjects:FindFirstChild("Dummy"):FindFirstChild("CollisionBox") then
+if game.Workspace.MiniGameObjects:FindFirstChild("Dummy").CollisionBox or game.Workspace.MiniGameObjects.Dummy:FindFirstChild("CollisionBox") then
 game:GetService("ReplicatedStorage").Events.NotifyServerStompedObject:FireServer(game.Workspace.MiniGameObjects.Dummy.CollisionBox)
 end
 if game.Workspace:FindFirstChild("Scene") then
 rcreatetable(game.Workspace.Scene,tiles)
 game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(game.Workspace.Scene[tiles[math.random(1,#tiles)]],game.Workspace.Scene[tiles[math.random(1,#tiles)]])
+end
+end)
+
+Tab1:CreateToggle("Auto Open Chest", function(value)
+_G.OChest = value
+while wait() do
+if _G.OChest == false then break end
+game:GetService("ReplicatedStorage").Functions.PurchaseFromServer:InvokeServer("RegularChest")
 end
 end)
