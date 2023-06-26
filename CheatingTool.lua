@@ -28,8 +28,7 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
     end
 end)
 
-Tab1:CreateButton("Cheat Simon Say", function()
-if game.Workspace:FindFirstChild("Outer") then
+Tab1:CreateButton("teleport to marbles", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "outer" then
@@ -37,8 +36,9 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
             end
         end
     end
-   end
-if game.Workspace:FindFirstChild("glass") or game.Workspace:FindFirstChild("Glass") then
+end)
+
+Tab1:CreateButton("break glass", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "glass" then
@@ -46,21 +46,23 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
             end
         end
     end
-end
+end)
 --[[if game:GetService("Workspace").Arena:FindFirstChild("Head"):FindFirstChild("Head") then
 tp_client(game:GetService("Workspace").Arena.Head.Head)
 end
 if game:GetService("Workspace").MiniGameObjects:FindFirstChild("Head"):FindFirstChild("Head") then
 tp_client(game:GetService("Workspace").MiniGameObjects.Head.Head)
 end--]]
-if game.Workspace.MiniGameObjects:FindFirstChild("Dummy").CollisionBox or game.Workspace.MiniGameObjects.Dummy:FindFirstChild("CollisionBox") then
+Tab1:CreateButton("Throw", function()
 game:GetService("ReplicatedStorage").Events.NotifyServerStompedObject:FireServer(game.Workspace.MiniGameObjects.Dummy.CollisionBox)
-end
+end)
+--[[
 if game.Workspace:FindFirstChild("Scene") then
 rcreatetable(game.Workspace.Scene,tiles)
-game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(game.Workspace.Scene[tiles[math.random(1,#tiles)]],game.Workspace.Scene[tiles[math.random(1,#tiles)]])
+game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(game.Workspace.Scene[tiles[math.random(1,#tiles),game.Workspace.Scene[tiles[math.random(1,#tiles))
 end
 end)
+--]]
 
 Tab1:CreateToggle("Auto Open Chest", function(value)
 _G.OChest = value
