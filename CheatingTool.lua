@@ -53,8 +53,12 @@ end
 if game:GetService("Workspace").MiniGameObjects:FindFirstChild("Head"):FindFirstChild("Head") then
 tp_client(game:GetService("Workspace").MiniGameObjects.Head.Head)
 end--]]
-Tab1:CreateButton("Throw", function()
-game:GetService("ReplicatedStorage").Events.NotifyServerStompedObject:FireServer(game.Workspace.MiniGameObjects.Dummy.CollisionBox)
+Tab1:CreateButton("Throw and stomp", function()
+if game.Workspace.MiniGameObjects.Dummy:FindFirstChild("CollisionBox") then
+   game:GetService("ReplicatedStorage").Events.NotifyServerStompedObject:FireServer(game.Workspace.MiniGameObjects.Dummy.CollisionBox)
+else
+   game:GetService("ReplicatedStorage").Events.NotifyServerStompedObject:FireServer(game.Workspace.MiniGameObjects.Dummy)
+end
 end)
 --[[
 if game.Workspace:FindFirstChild("Scene") then
