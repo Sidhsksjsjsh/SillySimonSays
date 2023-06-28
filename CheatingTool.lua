@@ -3,10 +3,15 @@ loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-f
 local Window_1 = Library:NewWindow("Silly Simon Says")
 
 local Tab1 = Window_1:NewSection("Main")
+local Tab2 = Window_1:NewSection("idk🗿")
+
 --[[
 next update:
 1. ???
 --]]
+
+local round = 0
+local pancake = 0
 
 function tp_client(strip)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(strip.Position)
@@ -60,6 +65,45 @@ else
    game:GetService("ReplicatedStorage").Events.NotifyServerStompedObject:FireServer(game.Workspace.MiniGameObjects.Dummy)
 end
 end)
+
+Tab1:CreateButton("Make Pancake", function()
+pancake = pancake + 1
+game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(pancake)
+end)
+
+Tab1:CreateButton("Click Pimple", function()
+for i,v in pairs(workspace:GetDescendants()) do
+   if v:IsA("ClickDetector") then
+      fireclickdetector(v)
+    end
+  end
+end)
+
+Tab2:CreateButton("Button 1", function()
+round = round + 1
+game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,1)
+end)
+
+Tab2:CreateButton("Button 2", function()
+round = round + 1
+game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,2)
+end)
+
+Tab2:CreateButton("Button 3", function()
+round = round + 1
+game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,3)
+end)
+
+Tab2:CreateButton("Button 4", function()
+round = round + 1
+game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,4)
+end)
+
+Tab2:CreateButton("refresh", function()
+round = 0
+pancake = 0
+end)
+
 --[[
 if game.Workspace:FindFirstChild("Scene") then
 rcreatetable(game.Workspace.Scene,tiles)
