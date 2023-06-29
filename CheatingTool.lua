@@ -79,6 +79,16 @@ for i,v in pairs(workspace:GetDescendants()) do
   end
 end)
 
+Tab1:CreateButton("teleport to head", function()
+for i,v in pairs(game.Workspace:GetDescendants()) do
+        if v:IsA("BasePart") then
+            if v.Name:lower() == "head" then
+                tp_client(v)
+            end
+        end
+    end
+end)
+
 Tab2:CreateButton("Button 1", function()
 round = round + 1
 game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,1)
