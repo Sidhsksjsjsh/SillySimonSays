@@ -130,6 +130,19 @@ rcreatetable(game:GetService("Workspace").MiniGameObjects,anjingg)
 game:GetService("ReplicatedStorage").Events.NotifyServerScoreInMiniGame:FireServer(game:GetService("Workspace").MiniGameObjects[anjingg[math.random(1, #anjingg)]])
 end)
 
+Tab1:CreateButton("Hit Toilet Head", function()
+game:GetService("ReplicatedStorage").Events.NotifyServerHitObject:FireServer(game:GetService("Workspace").Scene.Toilets.Toilet.Head.Head)
+end)
+
+Tab1:CreateToggle("Level Up pet", function(value)
+_G.VPet = value
+while wait() do
+if _G.VPet == false then break end
+game:GetService("ReplicatedStorage").Events.AskServerToReinstanceLeveledUpEquippedPet:FireServer()
+end
+end)
+
+
 Tab2:CreateButton("Button 1", function()
 round = round + 1
 game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,1)
