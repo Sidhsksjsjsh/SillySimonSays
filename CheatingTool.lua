@@ -5,6 +5,11 @@ local Window_1 = Library:NewWindow("Silly Simon Says")
 local Tab1 = Window_1:NewSection("Main")
 local Tab2 = Window_1:NewSection("idk🗿")
 
+local Players = game:GetService("Players"):GetChildren()
+local RunService = game:GetService("RunService")
+local highlight = Instance.new("Highlight")
+highlight.Name = "Highlight"
+--local Clones = game:GetService("Workspace").MiniGameObjects[game.Players.LocalPlayer]
 --[[
 next update:
 1. ???
@@ -17,6 +22,7 @@ function tp_client(strip)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(strip.Position)
 end
 local tiles = {}
+local anjingg = {}
 function rcreatetable(Table_string,localname)
 for _,v in pairs(Table_string:GetChildren()) do
         table.insert(localname,v.Name)
@@ -72,7 +78,7 @@ game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireSer
 end)
 
 Tab1:CreateButton("Click Pimple", function()
-for i,v in pairs(workspace:GetDescendants()) do
+for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if v:IsA("ClickDetector") then
       fireclickdetector(v)
     end
@@ -87,6 +93,40 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
             end
         end
     end
+end)
+
+Tab1:CreateButton("X-Ray Clones", function()
+local Clones = game:GetService("Workspace").MiniGameObjects[game.Players.LocalPlayer]
+for i, v in pairs(Clones:GetChildren()) do
+    if not v:FindFirstChild("Highlight") then
+        local highlightClone = highlight:Clone()
+        highlightClone.Adornee = v
+        highlightClone.Parent = v
+        highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        highlightClone.Name = "Highlight"
+        --highlightClone.ResetOnSpawn = false
+    end
+end
+
+RunService.Heartbeat:Connect(function()
+    for i, v in pairs(Clones:GetChildren()) do
+        repeat wait() until v
+        if not v:FindFirstChild("Highlight") then
+            local highlightClone = highlight:Clone()
+            highlightClone.Adornee = v
+            highlightClone.Parent = v
+            highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            highlightClone.Name = "Highlight"
+            --highlightClone.ResetOnSpawn = false
+            task.wait()
+        end
+end
+end)
+end)
+
+Tab1:CreateButton("High Five", function()
+rcreatetable(game:GetService("Workspace").MiniGameObjects,anjingg)
+game:GetService("ReplicatedStorage").Events.NotifyServerScoreInMiniGame:FireServer(game:GetService("Workspace").MiniGameObjects[anjingg[math.random(1, #anjingg)]])
 end)
 
 Tab2:CreateButton("Button 1", function()
@@ -127,5 +167,13 @@ _G.OChest = value
 while wait() do
 if _G.OChest == false then break end
 game:GetService("ReplicatedStorage").Functions.PurchaseFromServer:InvokeServer("RegularChest")
+end
+end)
+
+Tab1:CreateToggle("Auto Open Egg", function(value)
+_G.VChest = value
+while wait() do
+if _G.VChest == false then break end
+game:GetService("ReplicatedStorage").Functions.PurchaseFromServer:InvokeServer("RegularEgg")
 end
 end)
