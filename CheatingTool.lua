@@ -21,6 +21,7 @@ local pancake = 0
 function tp_client(strip)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(strip.Position)
 end
+
 local tiles = {}
 local anjingg = {}
 function rcreatetable(Table_string,localname)
@@ -96,7 +97,7 @@ for i,v in pairs(game.Workspace:GetDescendants()) do
 end)
 
 Tab1:CreateButton("X-Ray Clones", function()
-local Clones = game:GetService("Workspace").MiniGameObjects[game.Players.LocalPlayer]
+local Clones = game:GetService("Workspace").MiniGameObjects:FindFirstChild(game.Players.LocalPlayer)
 for i, v in pairs(Clones:GetChildren()) do
     if not v:FindFirstChild("Highlight") then
         local highlightClone = highlight:Clone()
