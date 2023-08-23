@@ -173,7 +173,7 @@ Tab2:CreateButton("Auto step on head", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "head" then
-                LandingScript(CFrame.new(v.Position) * CFrame.Angles(3.141366958618164, 0.4928203821182251, -3.1414761543273926))
+                LandingScript(CFrame.new(v.Position) * CFrame.Angles(v.CFrame:toEulerAnglesXYZ()))
             end
         end
     end
