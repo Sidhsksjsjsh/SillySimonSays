@@ -2,8 +2,9 @@ local Library =
 loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 local Window_1 = Library:NewWindow("Silly Simon Says")
 
-local Tab1 = Window_1:NewSection("Main")
-local Tab2 = Window_1:NewSection("idk🗿")
+local Tab1 = Window_1:NewSection("Main | Section 1")
+local Tab2 = Window_1:NewSection("Main | Section 2")
+local Tab3 = Window_1:NewSection("Egg and Chest")
 
 local Players = game:GetService("Players"):GetChildren()
 local RunService = game:GetService("RunService")
@@ -22,6 +23,32 @@ function tp_client(strip)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(strip.Position)
 end
 
+function random_tp_client(pvc)
+for i = 1, #pvc do
+        tp_client(pvc)
+   end
+end
+
+function random_click(pvc)
+  for i = 1, #pvc do
+        fireclickdetector(pvc)
+    end
+end
+
+function random_hit(pvc)
+for i = 1, #pvc do
+        game:GetService("ReplicatedStorage").Events.NotifyServerScoreInMiniGame:FireServer(game:GetService("Workspace").MiniGameObjects[pvc[math.random(1, #pvc)]])
+    end
+end
+
+local ScriptAnglesAndCFrame = CFrame.new(14.7538480758667, 12.26094913482666, 0.11403696238994598) * CFrame.Angles(3.141366958618164, 0.4928203821182251, -3.1414761543273926)
+
+function LandingScript(pvc)
+for i = 1, #pvc do
+       game:GetService("ReplicatedStorage").Events.NotifyServerPlayerLanded:FireServer(pvc)
+    end
+end
+
 local tiles = {}
 local anjingg = {}
 function rcreatetable(Table_string,localname)
@@ -34,7 +61,7 @@ Tab1:CreateButton("farm orb score", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "orb" then
-                tp_client(v)
+                random_tp_client(v)
             end
         end
     end
@@ -44,7 +71,7 @@ Tab1:CreateButton("teleport to marbles", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "outer" then
-                tp_client(v)
+                random_tp_client(v)
             end
         end
     end
@@ -73,15 +100,15 @@ else
 end
 end)
 
-Tab1:CreateButton("Make Pancake", function()
-pancake = pancake + 1
-game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(pancake)
-end)
+--Tab1:CreateButton("Make Pancake", function()
+--pancake = pancake + 1
+--game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(pancake)
+--end)
 
 Tab1:CreateButton("Click Pimple", function()
 for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if v:IsA("ClickDetector") then
-      fireclickdetector(v)
+      random_click(v)
     end
   end
 end)
@@ -90,7 +117,7 @@ Tab1:CreateButton("teleport to head", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "head" then
-                tp_client(v)
+                random_tp_client(v)
             end
         end
     end
@@ -127,7 +154,7 @@ end)
 
 Tab1:CreateButton("High Five", function()
 rcreatetable(game:GetService("Workspace").MiniGameObjects,anjingg)
-game:GetService("ReplicatedStorage").Events.NotifyServerScoreInMiniGame:FireServer(game:GetService("Workspace").MiniGameObjects[anjingg[math.random(1, #anjingg)]])
+random_hit(anjingg)
 end)
 
 Tab1:CreateButton("Hit Toilet Head", function()
@@ -142,30 +169,14 @@ game:GetService("ReplicatedStorage").Events.AskServerToReinstanceLeveledUpEquipp
 end
 end)
 
-
-Tab2:CreateButton("Button 1", function()
-round = round + 1
-game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,1)
-end)
-
-Tab2:CreateButton("Button 2", function()
-round = round + 1
-game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,2)
-end)
-
-Tab2:CreateButton("Button 3", function()
-round = round + 1
-game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,3)
-end)
-
-Tab2:CreateButton("Button 4", function()
-round = round + 1
-game:GetService("ReplicatedStorage").Events.SubmitToServerMiniGameAnswer:FireServer(round,4)
-end)
-
-Tab2:CreateButton("refresh", function()
-round = 0
-pancake = 0
+Tab2:CreateButton("Auto step on head", function()
+for i,v in pairs(game.Workspace:GetDescendants()) do
+        if v:IsA("BasePart") then
+            if v.Name:lower() == "head" then
+                LandingScript(CFrame.new(v.Position) * CFrame.Angles(3.141366958618164, 0.4928203821182251, -3.1414761543273926))
+            end
+        end
+    end
 end)
 
 --[[
@@ -176,7 +187,7 @@ end
 end)
 --]]
 
-Tab1:CreateToggle("Auto Open Chest", function(value)
+Tab3:CreateToggle("Auto Open Chest", function(value)
 _G.OChest = value
 while wait() do
 if _G.OChest == false then break end
@@ -184,7 +195,7 @@ game:GetService("ReplicatedStorage").Functions.PurchaseFromServer:InvokeServer("
 end
 end)
 
-Tab1:CreateToggle("Auto Open Egg", function(value)
+Tab3:CreateToggle("Auto Open Egg", function(value)
 _G.VChest = value
 while wait() do
 if _G.VChest == false then break end
