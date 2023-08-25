@@ -20,7 +20,10 @@ local round = 0
 local pancake = 0
 
 function tp_client(strip)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(strip.Position)
+for i = 10, 1, -1 do
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(strip.Position)
+      wait()
+   end
 end
 
 function random_tp_client(pvc)
@@ -30,21 +33,26 @@ for i = 1, #pvc do
 end
 
 function random_click(pvc)
-  for i = 1, #pvc do
+for i = 10, 1, -1 do
         fireclickdetector(pvc)
+        wait()
     end
 end
 
 function random_hit(pvc)
-for i = 1, #pvc do
+for i = 10, 1, -1 do
         game:GetService("ReplicatedStorage").Events.NotifyServerScoreInMiniGame:FireServer(game:GetService("Workspace").MiniGameObjects[pvc[math.random(1, #pvc)]])
+        wait()
     end
 end
 
 local ScriptAnglesAndCFrame = CFrame.new(14.7538480758667, 12.26094913482666, 0.11403696238994598) * CFrame.Angles(3.141366958618164, 0.4928203821182251, -3.1414761543273926)
 
 function LandingScript(pvc)
-game:GetService("ReplicatedStorage").Events.NotifyServerPlayerLanded:FireServer(pvc)
+for i = 10, 1, -1 do
+        game:GetService("ReplicatedStorage").Events.NotifyServerPlayerLanded:FireServer(pvc)
+        wait()
+   end
 end
 
 local tiles = {}
@@ -106,7 +114,7 @@ end)
 Tab1:CreateButton("Click Pimple", function()
 for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if v:IsA("ClickDetector") then
-      fireclickdetector(v)
+      random_click(v)
     end
   end
 end)
