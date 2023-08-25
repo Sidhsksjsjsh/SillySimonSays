@@ -44,9 +44,7 @@ end
 local ScriptAnglesAndCFrame = CFrame.new(14.7538480758667, 12.26094913482666, 0.11403696238994598) * CFrame.Angles(3.141366958618164, 0.4928203821182251, -3.1414761543273926)
 
 function LandingScript(pvc)
-for i = 1, #pvc do
-       game:GetService("ReplicatedStorage").Events.NotifyServerPlayerLanded:FireServer(pvc)
-    end
+game:GetService("ReplicatedStorage").Events.NotifyServerPlayerLanded:FireServer(pvc)
 end
 
 local tiles = {}
@@ -61,7 +59,7 @@ Tab1:CreateButton("farm orb score", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "orb" then
-                random_tp_client(v)
+                tp_client(v)
             end
         end
     end
@@ -71,7 +69,7 @@ Tab1:CreateButton("teleport to marbles", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "outer" then
-                random_tp_client(v)
+                tp_client(v)
             end
         end
     end
@@ -108,7 +106,7 @@ end)
 Tab1:CreateButton("Click Pimple", function()
 for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
    if v:IsA("ClickDetector") then
-      random_click(v)
+      fireclickdetector(v)
     end
   end
 end)
@@ -117,7 +115,7 @@ Tab1:CreateButton("teleport to head", function()
 for i,v in pairs(game.Workspace:GetDescendants()) do
         if v:IsA("BasePart") then
             if v.Name:lower() == "head" then
-                random_tp_client(v)
+                tp_client(v)
             end
         end
     end
@@ -152,10 +150,10 @@ end
 end)
 end)
 
-Tab1:CreateButton("High Five", function()
-rcreatetable(game:GetService("Workspace").MiniGameObjects,anjingg)
-random_hit(anjingg)
-end)
+--Tab1:CreateButton("High Five", function()
+--rcreatetable(game:GetService("Workspace").MiniGameObjects,anjingg)
+--random_hit(anjingg)
+--end)
 
 Tab1:CreateButton("Hit Toilet Head", function()
 game:GetService("ReplicatedStorage").Events.NotifyServerHitObject:FireServer(game:GetService("Workspace").Scene.Toilets.Toilet.Head.Head)
